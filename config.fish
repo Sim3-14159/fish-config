@@ -4,6 +4,7 @@ end
 
 # ALIASES
 alias bat "batcat --italic-text=always"
+alias mdv "mdv --theme dark --watch"
 alias ls "eza --icons=always"
 alias dwdiff "dwdiff -c"
 alias v nvim
