@@ -70,7 +70,7 @@ function y --description "Open yazi file manager and cd to exited directory" --w
 end
 
 ## Projectdo
-abbr -a b --function projectdo_build
-abbr -a r --function projectdo_run
-abbr -a t --function projectdo_test
-abbr -a p --function projectdo_tool
+abbr -a b projectdo_build
+abbr -a r projectdo_run
+abbr -a t projectdo_test
+abbr -a p projectdo_tool
