@@ -1,6 +1,6 @@
 function fish_right_prompt
     set -l seconds (math "(round $CMD_DURATION/100) / 10")
-    set -l minutes (math "(round ($seconds/60)) * 60")
+    set -l minutes (math "floor($seconds/60) * 60")
     set seconds (math $seconds - $minutes)
     set minutes (math $minutes / 60)
     if test $seconds -ge 2 -o $minutes -gt 0

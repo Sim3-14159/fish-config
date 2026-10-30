@@ -55,6 +55,7 @@ export MANPAGER='nvim +Man!'
 export EDITOR=nvim
 export PATH="$PATH:$HOME/go/bin:/snap/bin"
 export TERMINFO_DIRS="$HOME/.terminfo:/usr/local/share/terminfo:"
+export COWPATH="$HOME/.local/share/cowsay/cows:/usr/share/cowsay/cows"
 
 # SHELL WRAPPERS
 eval "$(zoxide init fish)"
