@@ -34,6 +34,7 @@ abbr uu "cd ../.."
 abbr sim-paste "xsel -ob"
 abbr sim-copy "xsel -ib"
 abbr rm trash
+abbr diff delta # delta is better but I'm hardcoded to type diff
 
 #function _multicd -d 'cd .. multiple times'
 #    set -l length (math (string length -- $argv) - 1)
