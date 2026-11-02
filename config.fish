@@ -9,6 +9,9 @@ alias ls "eza --icons=always"
 alias dwdiff "dwdiff -c"
 alias v nvim
 alias fd fdfind
+if test "$TERM" = xterm-kitty
+    alias ssh="kitten ssh"
+end
 
 function gd --description 'Make a directory and cd into it. ("Go to Dir")'
     mkdir $argv && cd $argv
