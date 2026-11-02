@@ -76,3 +76,4 @@ abbr -a b projectdo_build
 abbr -a r projectdo_run
 abbr -a t projectdo_test
 abbr -a p projectdo_tool
+source /home/sim-likes-pi/.local/share/undo/undo.fish
