@@ -13,8 +13,11 @@ if test "$TERM" = xterm-kitty
     alias ssh="kitten ssh"
 end
 
-function gd --description 'Make a directory and cd into it. ("Go to Dir")'
-    mkdir $argv && cd $argv
+# Super cool abbreviation! `gd:dir` turns to `mkdir -p dir && cd dir`
+abbr --add gd_expand --regex '^gd:\S+' --function __expand_gd
+function __expand_gd
+    set -l dir (string replace -r '^gd:' '' -- "$argv[1]")
+    echo "mkdir -p $dir && cd $dir"
 end
 
 # ABBREVIATIONS
