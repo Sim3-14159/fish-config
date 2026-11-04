@@ -45,6 +45,8 @@ abbr 4FILES --set-cursor=! "$(string join \n -- 'for file in *' '!' 'end')"
 abbr wttr "curl wttr.in/Billings"
 abbr pg "ps aux | grep"
 abbr l lsd
+abbr nd nextd
+abbr pd prevd
 abbr s "" # in case I type l\ns then the s disappears
 abbr lt "ls --tree"
 abbr la "ls -A"
