@@ -9,6 +9,7 @@ alias ls "eza --icons=always"
 alias dwdiff "dwdiff -c"
 alias v nvim
 alias fd fdfind
+alias nano nvim # Whenever I copy a command from online and they use nano 🤮
 function rd --description "cd to a recent directory" --wraps cd # `rd` for "recent directory"
     set -l dirs */
     if test -n "$dirs[1]"
