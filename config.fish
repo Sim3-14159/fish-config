@@ -9,10 +9,20 @@ alias ls "eza --icons=always"
 alias dwdiff "dwdiff -c"
 alias v nvim
 alias fd fdfind
+function rd --description "cd to a recent directory" --wraps cd # `rd` for "recent directory"
+    set -l dirs */
+    if test -n "$dirs[1]"
+        cd (/bin/ls -dt1 $dirs | head -n 1)
+    else
+        echo "rd: No directories found" >&2
+        return 1
+    end
+end
 if test "$TERM" = xterm-kitty
     alias ssh="kitten ssh"
 end
 
+# ABBREVIATIONS
 # Super cool abbreviation! `gd:dir` turns to `mkdir -p dir && cd dir`
 abbr --add gd_expand --regex '^gd:\S+' --function __expand_gd
 function __expand_gd
@@ -20,8 +30,15 @@ function __expand_gd
     echo "mkdir -p $dir && cd $dir"
 end
 
-# ABBREVIATIONS
+abbr --add gc_expand --regex '^gc:\S+' --function __expand_gc
+function __expand_gc
+    set -l reponame (string replace -r '^gc:' '' -- "$argv[1]")
+    set -l foldername (string split / "$reponame" -f 2)
+    echo "gh repo clone $reponame && cd $foldername"
+end
+
 abbr wttr "curl wttr.in/Billings"
+abbr pg "ps aux | grep"
 #abbr gc "git commit -m \""
 #abbr gp "git push"
 #abbr ga "git add ."
@@ -32,6 +49,7 @@ abbr lt "ls --tree"
 abbr la "ls -A"
 abbr lf "ls -F"
 abbr cl clear
+abbr py python
 abbr pf "ps --forest"
 abbr pymol "env -u PYTHONPATH -u PYENV_ROOT PATH=/usr/bin:/bin pymol"
 abbr q exit
@@ -55,7 +73,10 @@ bind -M insert \cgp 'commandline "git push"'
 bind -M insert \cga 'commandline "git add ."'
 bind -M insert \cgs 'echo ""; git status; echo ""; commandline -f repaint'
 bind -M insert \cgd 'git diff; commandline -f repaint'
-bind -M insert \cgl "echo ''; git log --graph --all --decorate --pretty=format:'%C(auto)%h%d %s %C(dim white)(%cr)%Creset'; echo ''; commandline -f repaint"
+bind -M insert \cgl "echo ''
+ git log --graph --all --decorate --pretty=format:'%C(auto)%h%d %s %C(dim white)(%cr)%Creset'
+ echo ''
+ commandline -f repaint"
 
 # ENV VARS
 export MANPAGER='nvim +Man!'
