@@ -1,5 +1,5 @@
-if status is-interactive
-    # Commands to run in interactive sessions can go here
+if not status is-interactive
+    exit
 end
 
 # ALIASES
@@ -30,6 +30,7 @@ function __expand_gd
     echo "mkdir -p $dir && cd $dir"
 end
 
+# `gc:User/Repo` turns into `gh repo clone User/Repo && cd Repo`
 abbr --add gc_expand --regex '^gc:\S+' --function __expand_gc
 function __expand_gc
     set -l reponame (string replace -r '^gc:' '' -- "$argv[1]")
@@ -37,12 +38,11 @@ function __expand_gc
     echo "gh repo clone $reponame && cd $foldername"
 end
 
+abbr 4DIRS --set-cursor=! "$(string join \n -- 'for dir in */' 'cd $dir' '!' 'cd ..' 'end')"
+abbr 4FILES --set-cursor=! "$(string join \n -- 'for file in *' '!' 'end')"
+
 abbr wttr "curl wttr.in/Billings"
 abbr pg "ps aux | grep"
-#abbr gc "git commit -m \""
-#abbr gp "git push"
-#abbr ga "git add ."
-#abbr gs "git status"
 abbr l lsd
 abbr s "" # in case I type l\ns then the s disappears
 abbr lt "ls --tree"
@@ -60,12 +60,6 @@ abbr sim-copy "xsel -ib"
 abbr rm trash
 abbr diff delta # delta is better but I'm hardcoded to type diff
 
-#function _multicd -d 'cd .. multiple times'
-#    set -l length (math (string length -- $argv) - 1)
-#    echo cd (string repeat -n $length ../)
-#end
-#abbr --add dotdot --regex '^\.\.+$' --function _multicd
-
 # KEYBINDINGS
 ## Git
 bind -M insert \cgc 'commandline "git commit -m \\"\\""; commandline -C 15'
@@ -74,6 +68,15 @@ bind -M insert \cga 'commandline "git add ."'
 bind -M insert \cgs 'echo ""; git status; echo ""; commandline -f repaint'
 bind -M insert \cgd 'git diff; commandline -f repaint'
 bind -M insert \cgl "echo ''
+ git log --graph --all --decorate --pretty=format:'%C(auto)%h%d %s %C(dim white)(%cr)%Creset'
+ echo ''
+ commandline -f repaint"
+bind -M default \cgc 'commandline "git commit -m \\"\\""; commandline -C 15'
+bind -M default \cgp 'commandline "git push"'
+bind -M default \cga 'commandline "git add ."'
+bind -M default \cgs 'echo ""; git status; echo ""; commandline -f repaint'
+bind -M default \cgd 'git diff; commandline -f repaint'
+bind -M default \cgl "echo ''
  git log --graph --all --decorate --pretty=format:'%C(auto)%h%d %s %C(dim white)(%cr)%Creset'
  echo ''
  commandline -f repaint"
