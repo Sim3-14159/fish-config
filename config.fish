@@ -75,7 +75,9 @@ bind -M insert \cga 'commandline "git add ."'
 bind -M insert \cgs 'echo ""; git status; echo ""' repaint
 bind -M insert \cgd 'git diff' repaint
 bind -M insert \cgl "echo ''
- git log --graph --all --decorate --pretty=format:'%C(auto)%h%d %s %C(dim white)(%cr)%Creset'"
+ git log --graph --all --decorate --pretty=format:'%C(auto)%h%d %s %C(dim white)(%cr)%Creset'
+ echo ''" repaint
+bind -M insert \cgf 'echo ""; cowsay "Fetching..."; git fetch; echo ""' repaint
 bind -M default \cgc 'commandline "git commit -m \\"\\""
  commandline -C 15'
 bind -M default \cgp 'commandline "git push"'
@@ -105,7 +107,7 @@ export MANPAGER='nvim +Man!'
 export EDITOR=nvim
 export PATH="$PATH:$HOME/go/bin:/snap/bin"
 export TERMINFO_DIRS="$HOME/.terminfo:/usr/local/share/terminfo:"
-export COWPATH="$HOME/.local/share/cowsay/cows:/usr/share/cowsay/cows"
+export COWPATH="$HOME/.local/share/cowsay/cows/true-color/:$HOME/.local/share/cowsay/cows:/usr/share/cowsay/cows"
 
 # SHELL WRAPPERS
 # ==============
