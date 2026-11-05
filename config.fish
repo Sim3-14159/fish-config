@@ -6,7 +6,7 @@ end
 # =======
 alias bat "batcat --italic-text=always"
 alias mdv "mdv --theme dark --watch"
-alias ls "eza --icons=always"
+alias ls "eza --icons=auto"
 alias dwdiff "dwdiff -c"
 alias v nvim
 alias fd fdfind
