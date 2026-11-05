@@ -45,8 +45,8 @@ abbr 4FILES --set-cursor=! "$(string join \n -- 'for file in *' '!' 'end')"
 abbr wttr "curl wttr.in/Billings"
 abbr pg "ps aux | grep"
 abbr l lsd
-abbr nd nextd
-abbr pd prevd
+abbr nd nextd # also can press alt+rarrow
+abbr pd prevd # also can press alt+larrow
 abbr s "" # in case I type l\ns then the s disappears
 abbr lt "ls --tree"
 abbr la "ls -A"
@@ -83,6 +83,13 @@ bind -M default \cgl "echo ''
  git log --graph --all --decorate --pretty=format:'%C(auto)%h%d %s %C(dim white)(%cr)%Creset'
  echo ''
  commandline -f repaint"
+
+bind -M insert alt-k "prevd; commandline -f repaint"
+bind -M insert alt-j "nextd; commandline -f repaint"
+bind -M default alt-k "prevd; commandline -f repaint"
+bind -M default alt-j "nextd; commandline -f repaint"
+
+bind '' self-insert
 
 # ENV VARS
 export MANPAGER='nvim +Man!'
