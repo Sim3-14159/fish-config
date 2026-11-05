@@ -3,6 +3,7 @@ if not status is-interactive
 end
 
 # ALIASES
+# =======
 alias bat "batcat --italic-text=always"
 alias mdv "mdv --theme dark --watch"
 alias ls "eza --icons=always"
@@ -24,6 +25,7 @@ if test "$TERM" = xterm-kitty
 end
 
 # ABBREVIATIONS
+# =============
 # Super cool abbreviation! `gd:dir` turns to `mkdir -p dir && cd dir`
 abbr --add gd_expand --regex '^gd:\S+' --function __expand_gd
 function __expand_gd
@@ -64,7 +66,9 @@ abbr rm trash
 abbr diff delta # delta is better but I'm hardcoded to type diff
 
 # KEYBINDINGS
-## Git
+# ===========
+# Git
+# ---
 bind -M insert \cgc 'commandline "git commit -m \\"\\""; commandline -C 15'
 bind -M insert \cgp 'commandline "git push"'
 bind -M insert \cga 'commandline "git add ."'
@@ -89,9 +93,11 @@ bind -M insert alt-j "nextd; commandline -f repaint"
 bind -M default alt-k "prevd; commandline -f repaint"
 bind -M default alt-j "nextd; commandline -f repaint"
 
+# If there is no keybinding for something, insert the char instead
 bind '' self-insert
 
 # ENV VARS
+# ========
 export MANPAGER='nvim +Man!'
 export EDITOR=nvim
 export PATH="$PATH:$HOME/go/bin:/snap/bin"
@@ -99,9 +105,11 @@ export TERMINFO_DIRS="$HOME/.terminfo:/usr/local/share/terminfo:"
 export COWPATH="$HOME/.local/share/cowsay/cows:/usr/share/cowsay/cows"
 
 # SHELL WRAPPERS
+# ==============
 eval "$(zoxide init fish)"
 
-## Yazi
+# Yazi
+# ----
 function y --description "Open yazi file manager and cd to exited directory" --wraps yazi
     set tmp (mktemp -t "yazi-cwd.XXXXXX")
     command yazi $argv --cwd-file="$tmp"
@@ -111,7 +119,8 @@ function y --description "Open yazi file manager and cd to exited directory" --w
     command rm -f -- "$tmp"
 end
 
-## Projectdo
+# Projectdo
+# ---------
 abbr -a b projectdo_build
 abbr -a r projectdo_run
 abbr -a t projectdo_test
