@@ -72,29 +72,32 @@ abbr diff delta # delta is better but I'm hardcoded to type diff
 bind -M insert \cgc 'commandline "git commit -m \\"\\""; commandline -C 15'
 bind -M insert \cgp 'commandline "git push"'
 bind -M insert \cga 'commandline "git add ."'
-bind -M insert \cgs 'echo ""; git status; echo ""; commandline -f repaint'
-bind -M insert \cgd 'git diff; commandline -f repaint'
+bind -M insert \cgs 'echo ""; git status; echo ""' repaint
+bind -M insert \cgd 'git diff' repaint
 bind -M insert \cgl "echo ''
- git log --graph --all --decorate --pretty=format:'%C(auto)%h%d %s %C(dim white)(%cr)%Creset'
- echo ''
- commandline -f repaint"
-bind -M default \cgc 'commandline "git commit -m \\"\\""; commandline -C 15'
+ git log --graph --all --decorate --pretty=format:'%C(auto)%h%d %s %C(dim white)(%cr)%Creset'"
+bind -M default \cgc 'commandline "git commit -m \\"\\""
+ commandline -C 15'
 bind -M default \cgp 'commandline "git push"'
 bind -M default \cga 'commandline "git add ."'
-bind -M default \cgs 'echo ""; git status; echo ""; commandline -f repaint'
-bind -M default \cgd 'git diff; commandline -f repaint'
+bind -M default \cgs 'echo ""
+ git status
+ echo ""' repaint
+bind -M default \cgd 'git diff' repaint
 bind -M default \cgl "echo ''
  git log --graph --all --decorate --pretty=format:'%C(auto)%h%d %s %C(dim white)(%cr)%Creset'
- echo ''
- commandline -f repaint"
+ echo ''" repaint
 
-bind -M insert alt-k "prevd; commandline -f repaint"
-bind -M insert alt-j "nextd; commandline -f repaint"
-bind -M default alt-k "prevd; commandline -f repaint"
-bind -M default alt-j "nextd; commandline -f repaint"
+bind -M insert alt-k prevd repaint
+bind -M insert alt-j nextd repaint
+bind -M default alt-k prevd repaint
+bind -M default alt-j nextd repaint
 
 # If there is no keybinding for something, insert the char instead
 bind '' self-insert
+# In "default" mode I can use `l` instead of right arrow, but
+# in "insert" mode I use this instead
+bind -M insert ctrl-\; accept-autosuggestion
 
 # ENV VARS
 # ========
