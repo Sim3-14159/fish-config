@@ -53,6 +53,7 @@ abbr s "" # in case I type l\ns then the s disappears
 abbr lt "ls --tree"
 abbr la "ls -A"
 abbr lf "ls -F"
+abbr ll "ls -lh"
 abbr cl clear
 abbr py python
 abbr pf "ps --forest"
