@@ -109,6 +109,7 @@ export EDITOR=nvim
 export PATH="$PATH:$HOME/go/bin:/snap/bin"
 export TERMINFO_DIRS="$HOME/.terminfo:/usr/local/share/terminfo:"
 export COWPATH="$HOME/.local/share/cowsay/cows/true-color/:$HOME/.local/share/cowsay/cows:/usr/share/cowsay/cows"
+export PAGER="batcat -l fish"
 
 # SHELL WRAPPERS
 # ==============
