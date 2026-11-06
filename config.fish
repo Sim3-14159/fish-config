@@ -79,6 +79,7 @@ bind -M insert \cgl "echo ''
  git log --graph --all --decorate --pretty=format:'%C(auto)%h%d %s %C(dim white)(%cr)%Creset'
  echo ''" repaint
 bind -M insert \cgf 'echo ""; cowsay "Fetching..."; git fetch; echo ""' repaint
+
 bind -M default \cgc 'commandline "git commit -m \\"\\""
  commandline -C 15'
 bind -M default \cgp 'commandline "git push"'
@@ -90,12 +91,12 @@ bind -M default \cgd 'git diff' repaint
 bind -M default \cgl "echo ''
  git log --graph --all --decorate --pretty=format:'%C(auto)%h%d %s %C(dim white)(%cr)%Creset'
  echo ''" repaint
+bind -M default \cgf 'echo ""; cowsay "Fetching..."; git fetch; echo ""' repaint
 
 bind -M insert alt-k prevd repaint
 bind -M insert alt-j nextd repaint
 bind -M default alt-k prevd repaint
 bind -M default alt-j nextd repaint
-
 # If there is no keybinding for something, insert the char instead
 bind '' self-insert
 # In "default" mode I can use `l` instead of right arrow, but
@@ -109,11 +110,12 @@ export EDITOR=nvim
 export PATH="$PATH:$HOME/go/bin:/snap/bin"
 export TERMINFO_DIRS="$HOME/.terminfo:/usr/local/share/terminfo:"
 export COWPATH="$HOME/.local/share/cowsay/cows/true-color/:$HOME/.local/share/cowsay/cows:/usr/share/cowsay/cows"
-export PAGER="batcat -l fish"
+export PAGER="batcat"
 
 # SHELL WRAPPERS
 # ==============
 eval "$(zoxide init fish)"
+source /home/sim-likes-pi/.local/share/undo/undo.fish
 
 # Yazi
 # ----
@@ -132,4 +134,3 @@ abbr -a b projectdo_build
 abbr -a r projectdo_run
 abbr -a t projectdo_test
 abbr -a p projectdo_tool
-source /home/sim-likes-pi/.local/share/undo/undo.fish
