@@ -22,6 +22,7 @@ function rd --description "cd to a recent directory" --wraps cd # `rd` for "rece
 end
 if test "$TERM" = xterm-kitty
     alias ssh="kitten ssh"
+    alias rg="kitten hyperlinked-grep"
 end
 
 # ABBREVIATIONS
@@ -40,6 +41,10 @@ function __expand_gc
     set -l foldername (string split / "$reponame" -f 2)
     echo "gh repo clone $reponame && cd $foldername"
 end
+
+abbr --add --position anywhere -- nul '>/dev/null'
+abbr --add --position anywhere -- 1nul '1>/dev/null'
+abbr --add --position anywhere -- 2nul '2>/dev/null'
 
 abbr 4DIRS --set-cursor=! "$(string join \n -- 'for dir in */' 'cd $dir' '!' 'cd ..' 'end')"
 abbr 4FILES --set-cursor=! "$(string join \n -- 'for file in *' '!' 'end')"
@@ -61,6 +66,8 @@ abbr pymol "env -u PYTHONPATH -u PYENV_ROOT PATH=/usr/bin:/bin pymol"
 abbr q exit
 abbr u "cd .."
 abbr uu "cd ../.."
+abbr -- +x "chmod +x"
+abbr -- -x "chmod -x"
 abbr sim-paste "xsel -ob"
 abbr sim-copy "xsel -ib"
 abbr rm trash
@@ -74,7 +81,7 @@ bind -M insert \cgc 'commandline "git commit -m \\"\\""; commandline -C 15'
 bind -M insert \cgp 'commandline "git push"'
 bind -M insert \cga 'commandline "git add ."'
 bind -M insert \cgs 'echo ""; git status; echo ""' repaint
-bind -M insert \cgd 'git diff' repaint
+bind -M insert \cgd 'git diff; echo ""' repaint
 bind -M insert \cgl "echo ''
  git log --graph --all --decorate --pretty=format:'%C(auto)%h%d %s %C(dim white)(%cr)%Creset'
  echo ''" repaint
@@ -110,7 +117,7 @@ export EDITOR=nvim
 export PATH="$PATH:$HOME/go/bin:/snap/bin"
 export TERMINFO_DIRS="$HOME/.terminfo:/usr/local/share/terminfo:"
 export COWPATH="$HOME/.local/share/cowsay/cows/true-color/:$HOME/.local/share/cowsay/cows:/usr/share/cowsay/cows"
-export PAGER="batcat"
+# export PAGER="batcat"
 
 # SHELL WRAPPERS
 # ==============
