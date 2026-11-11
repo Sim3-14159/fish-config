@@ -1,6 +1,13 @@
 if not status is-interactive
     exit
 end
+if set -q fish_private_mode
+    printf '\e]21;background=#1a0b24@0.6\a'
+
+    function __reset_kitty_bg --on-event fish_exit
+        printf '\e]111\a'
+    end
+end
 
 # ALIASES
 # =======
