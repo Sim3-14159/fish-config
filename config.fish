@@ -148,3 +148,9 @@ abbr -a b projectdo_build
 abbr -a r projectdo_run
 abbr -a t projectdo_test
 abbr -a p projectdo_tool
+
+# Variables
+# =========
+set -g fish_color_option 4dc56e
+set -g fish_color_keyword magenta
+set -g fish_color_builtin blue
