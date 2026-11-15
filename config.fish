@@ -15,9 +15,9 @@ alias bat "batcat --italic-text=always"
 alias mdv "mdv --theme dark --watch"
 alias ls "eza --icons=auto"
 alias dwdiff "dwdiff -c"
-alias v nvim
 alias fd "fdfind --hyperlink"
 alias nano nvim # Whenever I copy a command from online and they use nano 🤮
+
 function rd --description "cd to a recent directory" --wraps cd # `rd` for "recent directory"
     set -l dirs */
     if test -n "$dirs[1]"
@@ -27,6 +27,7 @@ function rd --description "cd to a recent directory" --wraps cd # `rd` for "rece
         return 1
     end
 end
+
 if test "$TERM" = xterm-kitty
     alias ssh="kitten ssh"
     alias rg="kitten hyperlinked-grep"
@@ -59,6 +60,7 @@ abbr 4FILES --set-cursor=! "$(string join \n -- 'for file in *' '!' 'end')"
 abbr wttr "curl wttr.in/Billings"
 abbr pg "ps aux | grep"
 abbr l lsd
+abbr v nvim
 abbr nd nextd # also can press alt+rarrow
 abbr pd prevd # also can press alt+larrow
 abbr s "" # in case I type l\ns then the s disappears
@@ -84,28 +86,41 @@ abbr diff delta # delta is better but I'm hardcoded to type diff
 # ===========
 # Git
 # ---
-bind -M insert \cgc 'commandline "git commit -m \\"\\""; commandline -C 15'
+# insert mode bindings
+bind -M insert \cgc 'commandline "git commit -m \\"\\""
+ commandline -C 15
+ set fish_bind_mode default'
 bind -M insert \cgp 'commandline "git push"'
 bind -M insert \cga 'commandline "git add ."'
-bind -M insert \cgs 'echo ""; git status; echo ""' repaint
+bind -M insert \cgs 'echo ""
+ git status
+ echo ""' repaint
 bind -M insert \cgd 'git diff; echo ""' repaint
 bind -M insert \cgl "echo ''
  git log --graph --all --decorate --pretty=format:'%C(auto)%h%d %s %C(dim white)(%cr)%Creset'
  echo ''" repaint
-bind -M insert \cgf 'echo ""; cowsay "Fetching..."; git fetch; echo ""' repaint
+bind -M insert \cgf 'printf "\e]66;s=3;\a\n\n\n"; git fetch; printf "\n"' repaint
+bind -M insert \cgP 'commandline "git pull"' repaint
+bind -M insert \cgr 'commandline "git restore --staged "
+ set fish_vi_bind_mode insert'
 
+# normal mode bindings
 bind -M default \cgc 'commandline "git commit -m \\"\\""
- commandline -C 15'
+ commandline -C 15
+ set fish_vi_bind_mode insert'
 bind -M default \cgp 'commandline "git push"'
 bind -M default \cga 'commandline "git add ."'
 bind -M default \cgs 'echo ""
  git status
  echo ""' repaint
-bind -M default \cgd 'git diff' repaint
+bind -M default \cgd 'git diff; echo ""' repaint
 bind -M default \cgl "echo ''
  git log --graph --all --decorate --pretty=format:'%C(auto)%h%d %s %C(dim white)(%cr)%Creset'
  echo ''" repaint
-bind -M default \cgf 'echo ""; cowsay "Fetching..."; git fetch; echo ""' repaint
+bind -M default \cgf 'printf "\e]66;s=3;\a\n\n\n"; git fetch; printf "\n"' repaint
+bind -M default \cgP 'commandline "git pull"' repaint
+bind -M default \cgr 'commandline "git restore --staged "
+ set fish_vi_bind_mode insert'
 
 bind -M insert alt-k prevd repaint
 bind -M insert alt-j nextd repaint
@@ -142,12 +157,13 @@ function y --description "Open yazi file manager and cd to exited directory" --w
     command rm -f -- "$tmp"
 end
 
-# Projectdo
+# Buona
 # ---------
-abbr -a b projectdo_build
-abbr -a r projectdo_run
-abbr -a t projectdo_test
-abbr -a p projectdo_tool
+abbr -a b "buona run build"
+abbr -a r "buona run run"
+abbr -a i "buona run install"
+abbr -a t "buona run test"
+abbr -a c "buona run clean"
 
 # Variables
 # =========
