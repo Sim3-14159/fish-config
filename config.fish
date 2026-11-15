@@ -121,7 +121,7 @@ bind -M insert ctrl-\; accept-autosuggestion
 # ========
 export MANPAGER='nvim +Man!'
 export EDITOR=nvim
-export PATH="$PATH:$HOME/go/bin:/snap/bin"
+export PATH="$PATH:$HOME/go/bin:/snap/bin:$HOME/.cargo/bin"
 export TERMINFO_DIRS="$HOME/.terminfo:/usr/local/share/terminfo:"
 export COWPATH="$HOME/.local/share/cowsay/cows/true-color/:$HOME/.local/share/cowsay/cows:/usr/share/cowsay/cows"
 # export PAGER="batcat"
