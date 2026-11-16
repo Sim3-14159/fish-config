@@ -49,10 +49,15 @@ tide_java_color 000000
 tide_jobs_bg_color 444444
 tide_jobs_color 4E9A06
 tide_jobs_number_threshold 1000
+tide_jj_color 000000
+tide_jj_bg_color 4E9A06
+tide_jj_show_description false
+tide_jj_ancestor_bookmark_limit 1
+tide_jj_fit_width true
 tide_kubectl_bg_color 326CE5
 tide_kubectl_color 000000
 tide_left_prompt_frame_enabled true
-tide_left_prompt_items pwd git newline
+tide_left_prompt_items pwd vcs newline
 tide_left_prompt_prefix ''
 tide_left_prompt_separator_diff_color 
 tide_left_prompt_separator_same_color 
@@ -79,7 +84,7 @@ tide_pwd_bg_color 3465A4
 tide_pwd_color_anchors E4E4E4
 tide_pwd_color_dirs E4E4E4
 tide_pwd_color_truncated_dirs BCBCBC
-tide_pwd_markers .bzr .citc .git .hg .node-version .python-version .ruby-version .shorten_folder_marker .svn .terraform bun.lockb Cargo.toml composer.json CVS go.mod package.json build.zig
+tide_pwd_markers .bzr .citc .git .hg .jj .node-version .python-version .ruby-version .shorten_folder_marker .svn .terraform bun.lockb Cargo.toml composer.json CVS go.mod package.json build.zig
 tide_python_bg_color 444444
 tide_python_color 00AFAF
 tide_right_prompt_frame_enabled true
@@ -99,6 +104,8 @@ tide_status_bg_color 2E3436
 tide_status_bg_color_failure CC0000
 tide_status_color 4E9A06
 tide_status_color_failure FFFF00
+tide_sudo_bg_color F1C40F
+tide_sudo_color 000000
 tide_terraform_bg_color 800080
 tide_terraform_color 000000
 tide_time_bg_color D3D7CF

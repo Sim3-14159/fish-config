@@ -8,10 +8,10 @@ function _tide_init_install --on-event _tide_init_install
     if status is-interactive
         tide bug-report --check || sleep 4
 
-        if contains ilancosman/tide (string lower $_fisher_plugins)
+        if contains plttn/tide (string lower $_fisher_plugins)
             set_color bryellow
-            echo "ilancosman/tide is a development branch. Please install from a release tag:"
-            _tide_fish_colorize "fisher install ilancosman/tide@v6"
+            echo "plttn/tide is a development branch. Please install from a release tag:"
+            _tide_fish_colorize "fisher install plttn/tide@v7"
             sleep 3
         end
 
@@ -26,19 +26,26 @@ end
 
 function _tide_init_update --on-event _tide_init_update
     # Warn users who install from main branch
-    if contains ilancosman/tide (string lower $_fisher_plugins)
+    if contains plttn/tide (string lower $_fisher_plugins)
         set_color bryellow
-        echo "ilancosman/tide is a development branch. Please install from a release tag:"
-        _tide_fish_colorize "fisher install ilancosman/tide@v6"
+        echo "plttn/tide is a development branch. Please install from a release tag:"
+        _tide_fish_colorize "fisher install plttn/tide@v7"
         sleep 3
     end
 
     # Set (disable) the new jobs variable
     set -q tide_jobs_number_threshold || set -U tide_jobs_number_threshold 1000
+
+    _tide_migrate_vcs_prompt_items
+    _tide_migrate_orphaned_prompt_vars
 end
 
 function _tide_init_uninstall --on-event _tide_init_uninstall
     set -e VIRTUAL_ENV_DISABLE_PROMPT
-    set -e (set -U --names | string match --entire -r '^_?tide')
-    functions --erase (functions --all | string match --entire -r '^_?tide')
+
+    set -l tide_uvars (set -U --names | string match --entire -r '^_?tide')
+    set -q tide_uvars[1] && set -e $tide_uvars
+
+    set -l tide_functions (functions --all | string match --entire -r '^_?tide')
+    set -q tide_functions[1] && functions --erase $tide_functions
 end
