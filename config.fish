@@ -55,7 +55,9 @@ abbr --add --position anywhere -- 1nul '1>/dev/null'
 abbr --add --position anywhere -- 2nul '2>/dev/null'
 
 abbr 4DIRS --set-cursor=! "$(string join \n -- 'for dir in */' 'cd $dir' '!' 'cd ..' 'end')"
-abbr 4FILES --set-cursor=! "$(string join \n -- 'for file in *' '!' 'end')"
+abbr 4ALL --set-cursor=! "$(string join \n -- 'for file in *' '!' 'end')"
+abbr 4FILES --set-cursor=! "$(string join \n -- 'for file in (path filter --type file *)' '!' 'end')"
+abbr 4FIND --set-cursor=! "$(string join \n -- 'for file in (find . -!')"
 
 abbr wttr "curl wttr.in/Billings"
 abbr pg "ps aux | grep"
@@ -87,40 +89,50 @@ abbr diff delta # delta is better but I'm hardcoded to type diff
 # Git
 # ---
 # insert mode bindings
-bind -M insert \cgc 'commandline "git commit -m \\"\\""
- commandline -C 15
- set fish_bind_mode default'
+bind -M insert \cgc 'set fish_bind_mode insert
+ commandline "git commit -m \\"\\""
+ commandline -C 15'
 bind -M insert \cgp 'commandline "git push"'
 bind -M insert \cga 'commandline "git add ."'
 bind -M insert \cgs 'echo ""
  git status
  echo ""' repaint
-bind -M insert \cgd 'git diff; echo ""' repaint
+bind -M insert \cgd 'git diff
+ echo ""' repaint
 bind -M insert \cgl "echo ''
  git log --graph --all --decorate --pretty=format:'%C(auto)%h%d %s %C(dim white)(%cr)%Creset'
  echo ''" repaint
-bind -M insert \cgf 'printf "\e]66;s=3;\a\n\n\n"; git fetch; printf "\n"' repaint
+bind -M insert \cgf 'printf "\e]66;s=3;\a\n\n\n"
+ git fetch
+ printf "\n"' repaint
 bind -M insert \cgP 'commandline "git pull"' repaint
-bind -M insert \cgr 'commandline "git restore --staged "
- set fish_vi_bind_mode insert'
+bind -M insert \cgr 'set fish_vi_bind_mode insert
+ commandline "git restore "'
+bind -M insert \cgR 'set fish_vi_bind_mode insert
+ commandline "git restore --staged "'
 
 # normal mode bindings
-bind -M default \cgc 'commandline "git commit -m \\"\\""
- commandline -C 15
- set fish_vi_bind_mode insert'
+bind -M default \cgc 'set fish_bind_mode insert
+ commandline "git commit -m \\"\\""
+ commandline -C 15'
 bind -M default \cgp 'commandline "git push"'
 bind -M default \cga 'commandline "git add ."'
 bind -M default \cgs 'echo ""
  git status
  echo ""' repaint
-bind -M default \cgd 'git diff; echo ""' repaint
+bind -M default \cgd 'git diff
+ echo ""' repaint
 bind -M default \cgl "echo ''
  git log --graph --all --decorate --pretty=format:'%C(auto)%h%d %s %C(dim white)(%cr)%Creset'
  echo ''" repaint
-bind -M default \cgf 'printf "\e]66;s=3;\a\n\n\n"; git fetch; printf "\n"' repaint
+bind -M default \cgf 'printf "\e]66;s=3;\a\n\n\n"
+ git fetch
+ printf "\n"' repaint
 bind -M default \cgP 'commandline "git pull"' repaint
-bind -M default \cgr 'commandline "git restore --staged "
- set fish_vi_bind_mode insert'
+bind -M default \cgr 'set fish_vi_bind_mode insert
+ commandline "git restore "'
+bind -M default \cgR 'set fish_vi_bind_mode insert
+ commandline "git restore --staged "'
 
 bind -M insert alt-k prevd repaint
 bind -M insert alt-j nextd repaint
